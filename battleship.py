@@ -1,6 +1,8 @@
 """
 Battleship Project
-Name: G.Sai Likhita
+
+Name:Sai Likhita Gade
+
 Roll No:
 """
 
@@ -61,7 +63,9 @@ emptyGrid(rows, cols)
 Parameters: int ; int
 Returns: 2D list of ints
 '''
-def emptyGrid(rows,cols):
+
+def emptyGrid(rows, cols):
+
     Grid=[]
     for i in range(rows):
         column=[]
@@ -69,6 +73,7 @@ def emptyGrid(rows,cols):
             column.append(1)
         Grid.append(column)
     return Grid
+
 
 
 '''
@@ -115,14 +120,17 @@ Returns: 2D list of ints
 def addShips(grid, numShips):
     while (numShips>0):
         ship=createShip()
-        A_ship = checkShip(grid,ship)
-        if (A_ship == True):
+
+        A_ship = checkShip(grid.ship)
+        if (A_ship == True ):
+
             for i in range(len(ship)):
                 row=ship[i][0]
                 col=ship[i][1]
                 grid[row][col] = SHIP_UNCLICKED
             numShips -= 1
     return grid
+
 
 
 '''
