@@ -1,6 +1,8 @@
 """
 Battleship Project
+
 Name:Sai Likhita Gade
+
 Roll No:
 """
 
@@ -61,7 +63,9 @@ emptyGrid(rows, cols)
 Parameters: int ; int
 Returns: 2D list of ints
 '''
+
 def emptyGrid(rows, cols):
+
     Grid=[]
     for i in range(rows):
         column=[]
@@ -78,7 +82,14 @@ Parameters: no parameters
 Returns: 2D list of ints
 '''
 def createShip():
-    return
+    row=random.randint(1,8)
+    col = random.randint(1,8)
+    number=random.randint(0,1)
+    if number == 0:
+        ship = [[row,col-1],[row,col],[row,col+1]]
+    else:
+        ship=[[row-1,col],[row,col],[row+1,col]]
+    return ship
 
 
 '''
@@ -87,19 +98,32 @@ Parameters: 2D list of ints ; 2D list of ints
 Returns: bool
 '''
 def checkShip(grid, ship):
-    return
+    count=0
+    for i in range(len(ship)):
+        row=ship[i][0]
+        col=ship[i][1]
+        if grid[row][col]==EMPTY_UNCLICKED:
+            count=count+1
+    if count != 3:
+        return False
+    else:
+        return True
+
+
 
 
 '''
 addShips(grid, numShips)
 Parameters: 2D list of ints ; int
-Returns: 2D list of ints
+Returns: 2D list of ints 
 '''
 def addShips(grid, numShips):
     while (numShips>0):
         ship=createShip()
+
         A_ship = checkShip(grid.ship)
         if (A_ship == True ):
+
             for i in range(len(ship)):
                 row=ship[i][0]
                 col=ship[i][1]
@@ -285,6 +309,10 @@ def runSimulation(w, h):
 
 # This code runs the test cases to check your work
 if __name__ == "__main__":
+    test.testEmptyGrid()
+    test.testCreateShip()
+    test.testCheckShip()
+    test.testAddShips()
 
     ## Finally, run the simulation to test it manually ##
-    # runSimulation(500, 500)
+    #runSimulation(500,500) 
