@@ -83,12 +83,14 @@ Returns: 2D list of ints
 '''
 def createShip():
     row=random.randint(1,8)
-    col = random.randint(1,8)
+
+    col=random.randint(1,8)
     number=random.randint(0,1)
     if number == 0:
         ship = [[row,col-1],[row,col],[row,col+1]]
     else:
         ship=[[row-1,col],[row,col],[row+1,col]]
+
     return ship
 
 
