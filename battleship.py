@@ -1,6 +1,6 @@
 """
 Battleship Project
-Name:
+Name:Sai Likhita Gade
 Roll No:
 """
 
@@ -62,7 +62,14 @@ Parameters: int ; int
 Returns: 2D list of ints
 '''
 def emptyGrid(rows, cols):
-    return
+    Grid=[]
+    for i in range(rows):
+        column=[]
+        for j in range(cols):
+            column.append(1)
+        Grid.append(column)
+    return Grid
+
 
 
 '''
