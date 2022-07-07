@@ -36,6 +36,7 @@ def makeModel(data):
     data["computer"]=addShips (data["computer"],data["ships"])
     data["user"]= emptyGrid(data["rows"],data["cols"])
     data["user"]=addShips (data["computer"],data["ships"])
+    data["user"]=test.testGrid()
     return
 
 
@@ -45,6 +46,8 @@ Parameters: dict mapping strs to values ; Tkinter canvas ; Tkinter canvas
 Returns: None
 '''
 def makeView(data, userCanvas, compCanvas):
+    drawGrid(data,userCanvas,data["computer"],True)
+    drawGrid(data,userCanvas,data["user"],True)
     return
 
 
@@ -146,7 +149,15 @@ Parameters: dict mapping strs to values ; Tkinter canvas ; 2D list of ints ; boo
 Returns: None
 '''
 def drawGrid(data, canvas, grid, showShips):
+    for i in range(data["rows"]):
+        for j in range(data["cols"]):
+            if grid[i][j]==SHIP_UNCLICKED:
+                if showShips==SHIP_UNCLICKED:
+                    canvas.create_rectangle(i*data["cell size"],j*data["cell size"],(i+1)*data["cell size"],(j+1)*["cell size"],fill="yellow")
+                else:
+                    canvas.create_rectangle(i*data["cell size"],j*data["cell size"],(i+1)*data["cell size"],(j+1)*["cell size"],fill="blue")
     return
+    
 
 
 ### WEEK 2 ###
@@ -321,6 +332,7 @@ if __name__ == "__main__":
     test.testCheckShip()
     test.testAddShips()
     test.testMakeModel()
+
 
     ## Finally, run the simulation to test it manually ##
     #runSimulation(500,500) 
