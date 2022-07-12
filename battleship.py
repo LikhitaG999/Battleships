@@ -29,15 +29,16 @@ Returns: None
 def makeModel(data):
     data["rows"]=10
     data["cols"]=10
-    data["board size"]=500
-    data["cell size"]=data["board size"]/data["cols"]
+    data["board_size"]=500
+    data["cell_size"]=data["board_size"]//data["cols"]
+    print(data["cell_size"])
     data["ships"]=5
     data["computer"]= emptyGrid(data["rows"],data["cols"])
-    data["computer"]=addShips (data["computer"],data["ships"])
-    data["user"]= emptyGrid(data["rows"],data["cols"])
-    data["user"]=addShips (data["computer"],data["ships"])
+    data["computer"]=addShips(data["computer"],data["ships"])
+    # data["user"]= emptyGrid(data["rows"],data["cols"])
+    # data["user"]=addShips (data["computer"],data["ships"])
     data["user"]=test.testGrid()
-    return
+    return 
 
 
 '''
@@ -46,8 +47,8 @@ Parameters: dict mapping strs to values ; Tkinter canvas ; Tkinter canvas
 Returns: None
 '''
 def makeView(data, userCanvas, compCanvas):
-    drawGrid(data,userCanvas,data["computer"],True)
-    drawGrid(data,userCanvas,data["user"],True)
+    drawGrid(data,userCanvas, data["user"],True)
+    drawGrid(data,compCanvas,data["computer"],True)
     return
 
 
@@ -152,10 +153,9 @@ def drawGrid(data, canvas, grid, showShips):
     for i in range(data["rows"]):
         for j in range(data["cols"]):
             if grid[i][j]==SHIP_UNCLICKED:
-                if showShips==SHIP_UNCLICKED:
-                    canvas.create_rectangle(i*data["cell size"],j*data["cell size"],(i+1)*data["cell size"],(j+1)*["cell size"],fill="yellow")
-                else:
-                    canvas.create_rectangle(i*data["cell size"],j*data["cell size"],(i+1)*data["cell size"],(j+1)*["cell size"],fill="blue")
+                canvas.create_rectangle(j*data["cell_size"],i*data["cell_size"],(j+1)*data["cell_size"],(i+1)*data["cell_size"],fill="yellow")
+            else:
+                canvas.create_rectangle(j*data["cell_size"],i*data["cell_size"],(j+1)*data["cell_size"],(i+1)*data["cell_size"],fill="blue")
     return
     
 
@@ -177,8 +177,17 @@ Parameters: 2D list of ints
 Returns: bool
 '''
 def isHorizontal(ship):
-    return
-
+    if ((ship[0][0])==(ship[1][0])==(ship[2][0])):
+        if ((ship[0][1]+2)==(ship[1][1]+1)==(ship[2][1])):
+            return True
+        elif((ship[0][1])==(ship[1][1]+1)==(ship[2][1]+2)):
+            return True
+        elif((ship[0][1])==(ship[1][1]+2)==(ship[2][1]+1)):
+            return True
+        else:
+            return False
+    else:
+        return False
 
 '''
 getClickedCell(data, event)
@@ -332,7 +341,10 @@ if __name__ == "__main__":
     test.testCheckShip()
     test.testAddShips()
     test.testMakeModel()
+    test.testGrid()
+    test.testIsHorizontal()
+
 
 
     ## Finally, run the simulation to test it manually ##
-    #runSimulation(500,500) 
+    runSimulation(500,500) 
