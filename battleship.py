@@ -168,7 +168,17 @@ Parameters: 2D list of ints
 Returns: bool
 '''
 def isVertical(ship):
-    return
+    if ((ship[0][1])==(ship[1][1])==(ship[2][1])):
+        if((ship[0][0]+2)==(ship[1][0]+1)==(ship[2][0])):
+            return True
+        elif((ship[0][0])==(ship[1][0]+1)==(ship[2][0]+2)):
+            return True
+        elif((ship[0][0])==(ship[1][0]+2)==(ship[2][0]+1)):
+            return True
+        else:
+            return False
+    else:
+        return False
 
 
 '''
@@ -343,6 +353,7 @@ if __name__ == "__main__":
     test.testMakeModel()
     test.testGrid()
     test.testIsHorizontal()
+    test.testIsVertical()
 
 
 
