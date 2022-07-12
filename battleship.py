@@ -27,6 +27,15 @@ Parameters: dict mapping strs to values
 Returns: None
 '''
 def makeModel(data):
+    data["rows"]=10
+    data["cols"]=10
+    data["board size"]=500
+    data["cell size"]=data["board size"]/data["cols"]
+    data["ships"]=5
+    data["computer"]= emptyGrid(data["rows"],data["cols"])
+    data["computer"]=addShips (data["computer"],data["ships"])
+    data["user"]= emptyGrid(data["rows"],data["cols"])
+    data["user"]=addShips (data["computer"],data["ships"])
     return
 
 
@@ -122,10 +131,8 @@ Returns: 2D list of ints
 def addShips(grid, numShips):
     while (numShips>0):
         ship=createShip()
-
-        A_ship = checkShip(grid.ship)
+        A_ship = checkShip(grid,ship)
         if (A_ship == True ):
-
             for i in range(len(ship)):
                 row=ship[i][0]
                 col=ship[i][1]
@@ -315,6 +322,7 @@ if __name__ == "__main__":
     test.testCreateShip()
     test.testCheckShip()
     test.testAddShips()
+    test.testMakeModel()
 
     ## Finally, run the simulation to test it manually ##
     #runSimulation(500,500) 
