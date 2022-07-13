@@ -228,7 +228,7 @@ Parameters: 2D list of ints ; 2D list of ints
 Returns: bool
 '''
 def shipIsValid(grid, ship):
-   return 
+   return checkShip(grid,ship) and isVertical(ship) or isHorizontal(ship)
 
 
 '''
@@ -361,6 +361,7 @@ if __name__ == "__main__":
     test.testIsVertical()
     test.testGetClickedCell()
     test.testDrawShip()
+    test.testShipIsValid()
 
 
 
