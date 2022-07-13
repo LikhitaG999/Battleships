@@ -237,6 +237,15 @@ Parameters: dict mapping strs to values
 Returns: None
 '''
 def placeShip(data):
+    if shipIsValid(data["user"],data["temp"]):
+        for i in range(len(data["temp"])):
+            c=data["temp"][i][0]
+            r=data["temp"][i][1]
+            data["user"][c][r] = SHIP_UNCLICKED
+        data["user-ships"]+=1
+    else:
+        print("ship not valid")  
+    data["temp"]=[] 
     return
 
 
@@ -362,6 +371,7 @@ if __name__ == "__main__":
     test.testGetClickedCell()
     test.testDrawShip()
     test.testShipIsValid()
+
 
 
 
