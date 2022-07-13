@@ -38,7 +38,7 @@ def makeModel(data):
     data["user"]= emptyGrid(data["rows"],data["cols"])
     # data["user"]=addShips (data["computer"],data["ships"])
     #data["user"]=test.testGrid()
-    data["temp"]=test.testShip()
+   # data["temp"]=test.testShip()
     data["temp"]=[]
     data["user-ships"]=0
     return 
@@ -52,6 +52,7 @@ Returns: None
 def makeView(data, userCanvas, compCanvas):
     drawGrid(data,userCanvas, data["user"],True)
     drawGrid(data,compCanvas,data["computer"],True)
+    drawShip(data,userCanvas,data["temp"])
     return
 
 
@@ -225,7 +226,7 @@ Returns: None
 '''
 def drawShip(data, canvas, ship):
     for i in ship:
-        canvas.create_rectangle(i[1]*data["cell_size"],(i[1]+1)*data["cell_size"],i[0]*data["cell_size"],(i[0]+1)*data["cell_size"],fill="white")
+        canvas.create_rectangle(i[1]*data["cell_size"],i[0]*data["cell_size"],(i[1]+1)*data["cell_size"],(i[0]+1)*data["cell_size"],fill="white")
     return 
 
 
@@ -262,8 +263,17 @@ Parameters: dict mapping strs to values ; int ; int
 Returns: None
 '''
 def clickUserBoard(data, row, col):
- 
-return
+    if data["user-ships"]==5:
+        print("you can start the game")
+        return
+    for i in data["temp"]:
+        if (row,col)==i:
+            return
+    data["temp"].append([row,col])
+    if len(data["temp"])==3:
+        placeShip(data)
+    return
+
 
 
 
@@ -387,6 +397,7 @@ if __name__ == "__main__":
     test.testGetClickedCell()
     test.testDrawShip()
     test.testShipIsValid()
+
     
     
 
