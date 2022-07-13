@@ -35,9 +35,11 @@ def makeModel(data):
     data["ships"]=5
     data["computer"]= emptyGrid(data["rows"],data["cols"])
     data["computer"]=addShips(data["computer"],data["ships"])
-    # data["user"]= emptyGrid(data["rows"],data["cols"])
+    data["user"]= emptyGrid(data["rows"],data["cols"])
     # data["user"]=addShips (data["computer"],data["ships"])
-    data["user"]=test.testGrid()
+    #data["user"]=test.testGrid()
+    data["temp"]=test.testShip()
+    data["temp"]=[]
     return 
 
 
@@ -215,7 +217,9 @@ Parameters: dict mapping strs to values ; Tkinter canvas; 2D list of ints
 Returns: None
 '''
 def drawShip(data, canvas, ship):
-    return
+    for i in ship:
+        canvas.create_rectangle(i[1]*data["cell_size"],(i[1]+1)*data["cell_size"],i[0]*data["cell_size"],(i[0]+1)*data["cell_size"],fill="white")
+    return 
 
 
 '''
@@ -224,7 +228,7 @@ Parameters: 2D list of ints ; 2D list of ints
 Returns: bool
 '''
 def shipIsValid(grid, ship):
-    return
+   return 
 
 
 '''
@@ -352,10 +356,11 @@ if __name__ == "__main__":
     test.testCheckShip()
     test.testAddShips()
     test.testMakeModel()
-    test.testGrid()
+    test.testShip()
     test.testIsHorizontal()
     test.testIsVertical()
     test.testGetClickedCell()
+    test.testDrawShip()
 
 
 
