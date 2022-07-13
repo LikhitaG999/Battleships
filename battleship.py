@@ -40,6 +40,7 @@ def makeModel(data):
     #data["user"]=test.testGrid()
     data["temp"]=test.testShip()
     data["temp"]=[]
+    data["user-ships"]=0
     return 
 
 
@@ -69,7 +70,13 @@ Parameters: dict mapping strs to values ; mouse event object ; 2D list of ints
 Returns: None
 '''
 def mousePressed(data, event, board):
-    pass
+    cell=getClickedCell(data,event)
+    if board =="user":
+        clickUserBoard(data, cell[0],cell[1])
+    
+
+#else:
+#data["computer"](cell[0],cell[1])
 
 #### WEEK 1 ####
 
@@ -255,7 +262,16 @@ Parameters: dict mapping strs to values ; int ; int
 Returns: None
 '''
 def clickUserBoard(data, row, col):
-    return
+ 
+return
+
+
+
+  #  for (temp)
+#row,col==i    return
+
+#if =5
+#print(you can start the game)
 
 
 ### WEEK 3 ###
@@ -371,6 +387,8 @@ if __name__ == "__main__":
     test.testGetClickedCell()
     test.testDrawShip()
     test.testShipIsValid()
+    
+    
 
 
 
