@@ -302,7 +302,10 @@ Parameters: dict mapping strs to values ; int ; int
 Returns: None
 '''
 def runGameTurn(data, row, col):
-    return
+    if data["Computer"][row][col]==SHIP_CLICKED or EMPTY_CLICKED:
+       return None    
+    else:
+        updateBoard(data["computer"],row,col)
 
 
 '''
