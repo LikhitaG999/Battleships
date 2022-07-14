@@ -292,9 +292,10 @@ Parameters: dict mapping strs to values ; 2D list of ints ; int ; int ; str
 Returns: None
 '''
 def updateBoard(data, board, row, col, player):
-    return
-
-
+    if board[row][col]==SHIP_UNCLICKED:
+        board[row][col]=SHIP_CLICKED
+    if board[row][col]==EMPTY_UNCLICKED:
+        board[row][col]=EMPTY_CLICKED
 '''
 runGameTurn(data, row, col)
 Parameters: dict mapping strs to values ; int ; int
@@ -397,6 +398,7 @@ if __name__ == "__main__":
     test.testGetClickedCell()
     test.testDrawShip()
     test.testShipIsValid()
+    test.testUpdateBoard()
 
     
     
