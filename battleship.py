@@ -51,7 +51,7 @@ Returns: None
 '''
 def makeView(data, userCanvas, compCanvas):
     drawGrid(data,userCanvas, data["user"],True)
-    drawGrid(data,compCanvas,data["computer"],True)
+    drawGrid(data,compCanvas,data["computer"],False)
     drawShip(data,userCanvas,data["temp"])
     return
 
@@ -74,6 +74,8 @@ def mousePressed(data, event, board):
     cell=getClickedCell(data,event)
     if board =="user":
         clickUserBoard(data, cell[0],cell[1])
+    if board=="comp":
+        clickUserBoard(data,cell[0],cell[1])
     
 
 #else:
@@ -163,9 +165,16 @@ def drawGrid(data, canvas, grid, showShips):
     for i in range(data["rows"]):
         for j in range(data["cols"]):
             if grid[i][j]==SHIP_UNCLICKED:
-                canvas.create_rectangle(j*data["cell_size"],i*data["cell_size"],(j+1)*data["cell_size"],(i+1)*data["cell_size"],fill="yellow")
-            else:
-                canvas.create_rectangle(j*data["cell_size"],i*data["cell_size"],(j+1)*data["cell_size"],(i+1)*data["cell_size"],fill="blue")
+                if(showShips==True):
+                   canvas.create_rectangle(j*data["cell_size"],i*data["cell_size"],(j+1)*data["cell_size"],(i+1)*data["cell_size"],fill="yellow")
+                elif(showShips==False):
+                   canvas.create_rectangle(j*data["cell_size"],i*data["cell_size"],(j+1)*data["cell_size"],(i+1)*data["cell_size"],fill="blue")
+            elif(grid[i][j]==EMPTY_UNCLICKED):
+                canvas.create_rectangle(j*data["cell_size"],i*data["cell_size"],(j+1)*data["cell_size"],(i+1)*data["cell_size"],fill="blue")       
+            elif grid[i][j]==SHIP_CLICKED:
+                canvas.create_rectangle(j*data["cell_size"],i*data["cell_size"],(j+1)*data["cell_size"],(i+1)*data["cell_size"],fill="red")  
+            elif grid[i][j]==EMPTY_CLICKED:
+                canvas.create_rectangle(j*data["cell_size"],i*data["cell_size"],(j+1)*data["cell_size"],(i+1)*data["cell_size"],fill="white") 
     return
     
 
@@ -302,10 +311,12 @@ Parameters: dict mapping strs to values ; int ; int
 Returns: None
 '''
 def runGameTurn(data, row, col):
-    if data["Computer"][row][col]==SHIP_CLICKED or EMPTY_CLICKED:
+    if data["Computer"][row][col]==SHIP_CLICKED or data["computer"][row][col]==EMPTY_CLICKED:
        return None    
     else:
-        updateBoard(data["computer"],row,col)
+        updateBoard(data,data["computer"],row,col,"user")
+    row,col=getComputerGuess(data["user"])
+    updateBoard(data,data["user"],row,col,"comp")
 
 
 '''
@@ -314,7 +325,11 @@ Parameters: 2D list of ints
 Returns: list of ints
 '''
 def getComputerGuess(board):
-    return
+    while True:
+        row=random.randint(0,9)
+        col=random.randint(0,9)
+        if board[row][col]==EMPTY_UNCLICKED or board[row][col]==SHIP_UNCLICKED:
+           return [row,col]
 
 
 '''
@@ -402,6 +417,7 @@ if __name__ == "__main__":
     test.testDrawShip()
     test.testShipIsValid()
     test.testUpdateBoard()
+    test.testGetComputerGuess()
 
     
     
