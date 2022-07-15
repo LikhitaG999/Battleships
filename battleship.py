@@ -336,7 +336,7 @@ def runGameTurn(data, row, col):
            return  
         else:
            updateBoard(data,data["computer"],row,col,"user")
-        row,col=getComputerGuess(data["user"])
+        row,col=getcomputerGuess(data["user"])
         updateBoard(data,data["user"],row,col,"comp")
         data["current_turn"]+=1
     else:
@@ -347,7 +347,7 @@ getComputerGuess(board)
 Parameters: 2D list of ints
 Returns: list of ints
 '''
-def getComputerGuess(board):
+def getcomputerGuess(board):
     while True:
         row=random.randint(0,9)
         col=random.randint(0,9)
@@ -457,7 +457,7 @@ if __name__ == "__main__":
     test.testDrawShip()
     test.testShipIsValid()
     test.testUpdateBoard()
-    test.testGetComputerGuess()
+    test.testGetcomputerGuess()
     test.testIsGameOver()
 
     

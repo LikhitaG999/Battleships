@@ -210,17 +210,17 @@ def testUpdateBoard():
     assert(board[8][5] == 4)
     print("... done!")
 
-def testGetComputerGuess():
-    print("Testing getComputerGuess()...", end="")
+def testGetuserGuess():
+    print("Testing getuserGuess()...", end="")
     # You can guess anywhere on an empty board
     board = [ [1] * 10 for row in range(10) ]
-    guess = getComputerGuess(board)
+    guess = getcomputerGuess(board)
     assert(len(guess) == 2 and 0 <= guess[0] < 10 and 0 <= guess[1] < 10)
 
     # If the board is full except for one spot, you need to guess that one
     board = [ [3] * 10 for row in range(10) ]
     board[3][6] = 1
-    assert(getComputerGuess(board) == [3, 6])
+    assert(getcomputerGuess(board) == [3, 6])
     print("... done!")
 
 def testIsGameOver():
@@ -245,6 +245,6 @@ def testDrawGameOver():
 
 def week3Tests():
     testUpdateBoard()
-    testGetComputerGuess()
+    testGetuserGuess()
     testIsGameOver()
     testDrawGameOver()
