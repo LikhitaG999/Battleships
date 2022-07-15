@@ -41,7 +41,11 @@ def makeModel(data):
    # data["temp"]=test.testShip()
     data["temp"]=[]
     data["user-ships"]=0
-    data["winner"]="none"
+    data["winner"]=None
+    data["max"]=50
+    data["current_turn"]=0
+    #data["winner"]="draw"
+    #data["winner"]="user"    
     return 
 
 
@@ -54,6 +58,13 @@ def makeView(data, userCanvas, compCanvas):
     drawGrid(data,userCanvas, data["user"],True)
     drawGrid(data,compCanvas,data["computer"],False)
     drawShip(data,userCanvas,data["temp"])
+    if((data["winner"])=="user"):
+        drawGameOver(data,userCanvas)
+    elif((data["winner"])=="comp"):
+        drawGameOver(data,compCanvas)
+    elif((data["winner"])=="draw"):
+        drawGameOver(data,userCanvas)
+        drawGameOver(data,compCanvas)
     return
 
 
@@ -72,11 +83,14 @@ Parameters: dict mapping strs to values ; mouse event object ; 2D list of ints
 Returns: None
 '''
 def mousePressed(data, event, board):
-    cell=getClickedCell(data,event)
-    if board =="user":
-        clickUserBoard(data, cell[0],cell[1])
-    if board=="comp":
-        clickUserBoard(data,cell[0],cell[1])
+    if data["winner"]==None:
+        cell=getClickedCell(data,event)
+        if board =="user":
+           clickUserBoard(data,cell[0],cell[1])
+        if board=="comp":
+           clickUserBoard(data,cell[0],cell[1])
+           runGameTurn(data,cell[0],cell[1])
+    return
     
 
 #else:
@@ -315,13 +329,16 @@ Parameters: dict mapping strs to values ; int ; int
 Returns: None
 '''
 def runGameTurn(data, row, col):
-    if data["Computer"][row][col]==SHIP_CLICKED or data["computer"][row][col]==EMPTY_CLICKED:
-       return None    
+    if (data["current_turn"])<=(data["max"]):
+        if data["computer"][row][col]==SHIP_CLICKED or data["computer"][row][col]==EMPTY_CLICKED:
+           return  
+        else:
+           updateBoard(data,data["computer"],row,col,"user")
+        row,col=getComputerGuess(data["user"])
+        updateBoard(data,data["user"],row,col,"comp")
+        data["current_turn"]+=1
     else:
-        updateBoard(data,data["computer"],row,col,"user")
-    row,col=getComputerGuess(data["user"])
-    updateBoard(data,data["user"],row,col,"comp")
-
+        data["winner"]="draw"
 
 '''
 getComputerGuess(board)
@@ -357,6 +374,14 @@ Parameters: dict mapping strs to values ; Tkinter canvas
 Returns: None
 '''
 def drawGameOver(data, canvas):
+    if(data["winner"])=="user":
+        canvas.create_text(250,200,text="Congratulations,you have won!",fill="white",font=('Helvetica 20 italic'))
+    elif(data["winner"])=="comp":
+        canvas.create_text(250,200,text="you Lost!",fill="white",font=('Helvetica 20 italic'))
+    elif((data["winner"])=="draw"):
+         canvas.create_text(250,200,text="Draw match!",fill="white",font=('Helvetica 20 italic'))
+    return
+
     return
 
 
