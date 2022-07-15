@@ -58,13 +58,13 @@ def makeView(data, userCanvas, compCanvas):
     drawGrid(data,userCanvas, data["user"],True)
     drawGrid(data,compCanvas,data["computer"],False)
     drawShip(data,userCanvas,data["temp"])
-    if((data["winner"])=="user"):
-        drawGameOver(data,userCanvas)
-    elif((data["winner"])=="comp"):
-        drawGameOver(data,compCanvas)
-    elif((data["winner"])=="draw"):
-        drawGameOver(data,userCanvas)
-        drawGameOver(data,compCanvas)
+   # if((data["winner"])=="user"):
+       # drawGameOver(data,userCanvas)
+   # elif((data["winner"])=="comp"):
+       # drawGameOver(data,userCanvas)
+   # elif((data["winner"])=="draw"):
+    drawGameOver(data,userCanvas)
+    drawGameOver(data,compCanvas)
     return
 
 
@@ -74,6 +74,8 @@ Parameters: dict mapping strs to values ; key event object
 Returns: None
 '''
 def keyPressed(data, event):
+    print(event)
+    makeModel(data)
     pass
 
 
@@ -375,11 +377,14 @@ Returns: None
 '''
 def drawGameOver(data, canvas):
     if(data["winner"])=="user":
-        canvas.create_text(250,200,text="Congratulations,you have won!",fill="white",font=('Helvetica 20 italic'))
+        canvas.create_text(250,200,text="Congratulations,you have won!",fill="black",font=('Helvetica 20 italic'))
+        canvas.create_text(250,400,text="Play again",fill="black",font=('Helvetica 20 italic'))
     elif(data["winner"])=="comp":
-        canvas.create_text(250,200,text="you Lost!",fill="white",font=('Helvetica 20 italic'))
+        canvas.create_text(250,200,text="you Lost!",fill="black",font=('Helvetica 20 italic'))
+        canvas.create_text(250,400,text="play again",fill="black",font=('Helvetica 20 italic'))
     elif((data["winner"])=="draw"):
-         canvas.create_text(250,200,text="Draw match!",fill="white",font=('Helvetica 20 italic'))
+         canvas.create_text(250,200,text="Draw match!",fill="black",font=('Helvetica 20 italic'))
+         canvas.create_text(250,400,text="play again",fill="black",font=('Helvetica 20 italic'))
     return
 
     return
