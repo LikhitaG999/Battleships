@@ -210,8 +210,8 @@ def testUpdateBoard():
     assert(board[8][5] == 4)
     print("... done!")
 
-def testGetuserGuess():
-    print("Testing getuserGuess()...", end="")
+def testGetcomputerGuess():
+    print("Testing getcomputerGuess()...", end="")
     # You can guess anywhere on an empty board
     board = [ [1] * 10 for row in range(10) ]
     guess = getcomputerGuess(board)
@@ -245,6 +245,6 @@ def testDrawGameOver():
 
 def week3Tests():
     testUpdateBoard()
-    testGetuserGuess()
+    testGetcomputerGuess()
     testIsGameOver()
     testDrawGameOver()
