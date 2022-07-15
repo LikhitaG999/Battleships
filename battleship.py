@@ -41,6 +41,7 @@ def makeModel(data):
    # data["temp"]=test.testShip()
     data["temp"]=[]
     data["user-ships"]=0
+    data["winner"]="none"
     return 
 
 
@@ -305,6 +306,9 @@ def updateBoard(data, board, row, col, player):
         board[row][col]=SHIP_CLICKED
     if board[row][col]==EMPTY_UNCLICKED:
         board[row][col]=EMPTY_CLICKED
+    winner=isGameOver(board)
+    if(winner==True):
+        data["winner"]=player
 '''
 runGameTurn(data, row, col)
 Parameters: dict mapping strs to values ; int ; int
@@ -338,7 +342,13 @@ Parameters: 2D list of ints
 Returns: bool
 '''
 def isGameOver(board):
-    return
+    for row in range(len(board)):
+        for col in range(len(board)):
+            if board[row][col]==SHIP_UNCLICKED:
+                return False
+            else:
+                pass
+    return True
 
 
 '''
@@ -418,6 +428,7 @@ if __name__ == "__main__":
     test.testShipIsValid()
     test.testUpdateBoard()
     test.testGetComputerGuess()
+    test.testIsGameOver()
 
     
     
